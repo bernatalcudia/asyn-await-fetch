@@ -2,9 +2,10 @@
 
 async function requestNameEmailAddress(link) {
     const result = await fetch(link);
-    const data = await result.json();
-    data = data.name + data.email + data.address
-    return data;
+    let data = await result.json();
+    let { city } = data.address;
+    data = data.name + data.email + city;
+    console.log(data);
 }
 
 const link1 = "https://jsonplaceholder.typicode.com/users/1";
@@ -26,8 +27,7 @@ const promise3 = fetch("https://jsonplaceholder.typicode.com/users/3")
 
 
 
-
-
-Promise.all([promise1, promise2, promise3]).then((values) => {
-    console.log(values.reduce((accumulator, currentValue) => accumulator + currentValue))
-});
+requestNameEmailAddress(link1);
+console.log(link1)
+requestNameEmailAddress(link2);
+requestNameEmailAddress(link3);
